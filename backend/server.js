@@ -4,6 +4,8 @@ const cors = require("cors")
 const path = require("path")
 const connectDB = require("./config/db")
 const authRoutes = require("./routes/authRoutes")
+const incomeRoutes = require("./routes/incomeRoutes")
+const expenseRoutes = require("./routes/expenseRoute")
 
 const app = express()
 
@@ -19,6 +21,11 @@ app.use(
 app.use(express.json());
 
 app.use("/api/v1/auth", authRoutes)
+app.use("/api/v1/income", incomeRoutes)
+app.use("/api/v1/expense", expenseRoutes)
+
+//server upload foleder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 connectDB()
 const PORT = process.env.PORT || 5000
